@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { OktaAuthModule } from '@okta/okta-angular';
 
 import { MatToolbarModule,
          MatMenuModule,
@@ -39,6 +40,11 @@ import { NotesComponent } from './notes/notes.component';
     MatListModule,
     MatDividerModule,
     AppRoutingModule,
+    OktaAuthModule.initAuth({
+      issuer: 'https://{YourOktaDomain}/oauth2/default',
+      redirectUri: 'http://localhost:4200/implicit/callback',
+      clientId: '{ClientId}'
+    })
   ],
   bootstrap: [AppComponent]
 })
