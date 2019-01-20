@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" class="notes">
+  <mat-list fxFlex="100%" fxFlex.gt-sm="20%">
+    <mat-list-item *ngFor='let note of notes'>
+      <a>
+        {{note.title}}
+      </a>
+    </mat-list-item>
+  </mat-list>
+  <mat-divider fxShow="false" fxShow.gt-sm [vertical]="true"></mat-divider>
+  <mat-divider fxShow="true" fxShow.gt-sm="false" [vertical]="false"></mat-divider>
+  <div fxFlex="100%" fxFlex.gt-sm="70%" *ngIf="!editNote" class="note-container">
+    <h3>{{currentNote.title}}</h3>
+    <p>
+      {{currentNote.text}}
+    </p>
+    <div fxLayout="row" fxLayoutAlign="space-between center" >
+      <button mat-raised-button color="primary">Edit</button>
+      <button mat-raised-button color="warn">Delete</button>
+      <button mat-raised-button color="primary">New Note</button>
+    </div>
+  </div>
+  <div fxFlex="100%" fxFlex.gt-sm="70%" *ngIf="editNote" class="form-container">
+    <form [formGroup]="editNoteForm">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Title" formControlName="title">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Note text" formControlName="text"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Update</button>
+    </form>
+  </div>
+</div>

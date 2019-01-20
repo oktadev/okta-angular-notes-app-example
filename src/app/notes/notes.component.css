@@ -1,0 +1,17 @@
+.notes {
+  padding: 1rem;
+}
+
+.notes a {
+  cursor: pointer;
+}
+
+.form-container, .note-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.full-width {
+  width: 80%;
+  display: block;
+}
