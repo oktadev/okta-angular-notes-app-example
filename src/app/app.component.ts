@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
@@ -6,21 +6,21 @@ import { OktaAuthService } from '@okta/okta-angular';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public title = 'Angular Notes';
   public isAuthenticated: boolean;
 
   constructor(public oktaAuth: OktaAuthService) {}
 
-  ngOnInit() {
-    this.oktaAuth.isAuthenticated().then((auth) => {this.isAuthenticated = auth});
+  async ngOnInit() {
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
   }
 
-  login() {
-    this.oktaAuth.loginRedirect();
+  async login() {
+    await this.oktaAuth.signInWithRedirect();
   }
 
-  logout() {
-    this.oktaAuth.logout('/');
+  async logout() {
+    await this.oktaAuth.signOut();
   }
 }
