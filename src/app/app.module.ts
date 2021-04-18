@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { OktaAuthModule } from '@okta/okta-angular';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 
 import { MatToolbarModule,
          MatMenuModule,
@@ -18,6 +18,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotesComponent } from './notes/notes.component';
+
+const oktaConfig = {
+  issuer: 'https://{YourOktaDomain}/oauth2/default',
+  redirectUri: window.location.origin + '/callback',
+  clientId: '{ClientId}'
+};
 
 @NgModule({
   declarations: [
@@ -40,11 +46,10 @@ import { NotesComponent } from './notes/notes.component';
     MatListModule,
     MatDividerModule,
     AppRoutingModule,
-    OktaAuthModule.initAuth({
-      issuer: 'https://{YourOktaDomain}/oauth2/default',
-      redirectUri: 'http://localhost:4200/implicit/callback',
-      clientId: '{ClientId}'
-    })
+    OktaAuthModule,
+  ],
+  providers: [
+    { provide: OKTA_CONFIG, useValue: oktaConfig }
   ],
   bootstrap: [AppComponent]
 })
